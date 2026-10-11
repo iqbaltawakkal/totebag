@@ -56,25 +56,26 @@ export default function Home() {
       >
         Langsung ke konten
       </a>
-      <header className="bg-cream px-4 sm:px-6">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3">
-          <a href="#" className="min-w-0 truncate text-lg font-bold">
+      {/* Navbar transparan di atas hero. Gradasi gelap tipis menjaga teks putih tetap terbaca di foto terang. */}
+      <header className="absolute inset-x-0 top-0 z-20 bg-gradient-to-b from-black/60 via-black/25 to-transparent px-4 pb-6 text-white sm:px-6">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3">
+          <a href="#" className="nav-link min-w-0 truncate text-lg font-bold">
             {site.brandName}
           </a>
           <nav aria-label="Menu utama" className="shrink-0">
             <ul className="flex text-[15px] font-medium whitespace-nowrap sm:gap-4">
               <li>
-                <a href="#pilihan-model" className="inline-flex min-h-11 items-center px-2 hover:underline">
+                <a href="#pilihan-model" className="inline-flex min-h-11 items-center px-2 nav-link">
                   Model
                 </a>
               </li>
               <li>
-                <a href="#cara-pesan" className="inline-flex min-h-11 items-center px-2 hover:underline">
+                <a href="#cara-pesan" className="inline-flex min-h-11 items-center px-2 nav-link">
                   Cara Pesan
                 </a>
               </li>
               <li>
-                <a href="#faq" className="inline-flex min-h-11 items-center px-2 hover:underline">
+                <a href="#faq" className="inline-flex min-h-11 items-center px-2 nav-link">
                   FAQ
                 </a>
               </li>

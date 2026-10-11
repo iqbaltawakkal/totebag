@@ -38,6 +38,19 @@ body {
   line-height: 1.6;
 }
 
+@utility nav-link {
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.45);
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  &:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
 @utility ctrl-btn {
   display: inline-flex;
   height: 2.75rem;

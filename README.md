@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Landing Page Totebag Pre-Order
 
-## Getting Started
+Satu halaman (Next.js + Tailwind) untuk jualan totebag pre-order. Semua tombol mengarah ke WhatsApp.
 
-First, run the development server:
+## Menjalankan
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # cek sebelum deploy
+npm run start    # jalankan hasil build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Mengganti data
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Mau ganti apa | File |
+|---|---|
+| Nama brand, domain, nomor WhatsApp, kota, Instagram, estimasi PO, tanggal tutup PO, area kirim, tanggal "Terakhir diperbarui" | `src/config/site.ts` |
+| Produk (nama, harga, warna, ukuran, bahan, gambar) | `src/content/products.ts` |
+| FAQ | `src/content/faq.ts` |
+| Semua teks lain di halaman, pesan WhatsApp tiap tombol, judul & deskripsi SEO | `src/content/copy.ts` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Nomor WhatsApp**: format internasional tanpa `+` dan tanpa `0` di depan. Contoh `0812-3456-7890` → `6281234567890`.
+- **Tanggal tutup PO**: isi `poDeadline` (misal `"31 Oktober 2026"`). Kalau kosong, tidak ditampilkan.
+- **Terakhir diperbarui**: ganti `lastUpdated` (format `YYYY-MM-DD`) tiap kali isi halaman berubah. Tanggal ini juga dipakai di JSON-LD, sitemap, dan tahun copyright.
+- Kalau judul atau deskripsi jadi kepanjangan setelah nama brand/kota diganti, `npm run build` akan menampilkan peringatan `[SEO]`.
 
-## Learn More
+Halaman, JSON-LD (data untuk Google), dan `/llms.txt` (ringkasan untuk AI search) semuanya membaca dari file di atas, jadi faktanya selalu sama. Cukup ganti di satu tempat.
 
-To learn more about Next.js, take a look at the following resources:
+## Mengganti gambar
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Taruh foto asli di `public/images/` dengan nama yang sama, atau ganti path-nya di `copy.ts` / `products.ts`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `hero-1.jpg` … `hero-4.jpg`: slide atas, ukuran sekitar 1600 × 900 px. Objek utama sebaiknya di tengah, karena di HP gambar dipotong jadi tegak.
+- `produk-*.jpg`: foto produk, persegi (misal 800 × 800 px).
+- `logo.png`: logo untuk JSON-LD (persegi).
+- Ikon: `src/app/icon.svg`, `src/app/apple-icon.png` (180 × 180), dan `public/icons/` (192 & 512 px).
 
-## Deploy on Vercel
+Jangan lupa ganti teks `alt` (deskripsi gambar) di `copy.ts` / `products.ts` sesuai foto baru.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Gambar untuk share di WhatsApp/Instagram/Facebook dibuat otomatis dari `src/app/opengraph-image.tsx`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Tracking
+
+Setiap klik tombol WhatsApp mengirim `{ event: "whatsapp_click", location: "..." }` ke `window.dataLayer`. Pasang Google Tag Manager, lalu hubungkan event ini ke GA4 / Meta Pixel.
+
+## Aturan copy
+
+- Ini **pre-order**. Jangan pernah tulis kata-kata yang mengesankan stok siap atau bisa langsung dikirim.
+- Pakai "kamu", kalimat pendek, kata sehari-hari.
+- Jangan tambah testimoni, jumlah order, atau review palsu. Tempat testimoni ditandai `TODO` di `src/app/page.tsx`.

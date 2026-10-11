@@ -10,7 +10,6 @@ export function WhatsAppIcon({ className = "h-5 w-5" }: { className?: string }) 
 
 type Props = {
   message?: string;
-  /** Dikirim ke dataLayer sebagai `location`, misal "hero-1" atau "produk-kanvas-polos". */
   location: string;
   children: React.ReactNode;
   variant?: "solid" | "outline";

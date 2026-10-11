@@ -27,19 +27,6 @@ npm run start    # jalankan hasil build
 
 Halaman, JSON-LD (data untuk Google), dan `/llms.txt` (ringkasan untuk AI search) semuanya membaca dari file di atas, jadi faktanya selalu sama. Cukup ganti di satu tempat.
 
-## Mengganti gambar
-
-Taruh foto asli di `public/images/` dengan nama yang sama, atau ganti path-nya di `copy.ts` / `products.ts`:
-
-- `hero-1.jpg` … `hero-4.jpg`: slide atas, ukuran sekitar 1600 × 900 px. Objek utama sebaiknya di tengah, karena di HP gambar dipotong jadi tegak.
-- `produk-*.jpg`: foto produk, persegi (misal 800 × 800 px).
-- `logo.png`: logo untuk JSON-LD (persegi).
-- Ikon: `src/app/icon.svg`, `src/app/apple-icon.png` (180 × 180), dan `public/icons/` (192 & 512 px).
-
-Jangan lupa ganti teks `alt` (deskripsi gambar) di `copy.ts` / `products.ts` sesuai foto baru.
-
-Gambar untuk share di WhatsApp/Instagram/Facebook dibuat otomatis dari `src/app/opengraph-image.tsx`.
-
 ## Tracking
 
 Setiap klik tombol WhatsApp mengirim `{ event: "whatsapp_click", location: "..." }` ke `window.dataLayer`. Pasang Google Tag Manager, lalu hubungkan event ini ke GA4 / Meta Pixel.
